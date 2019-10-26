@@ -1,0 +1,117 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <body>
+        <h3>Question 1</h3>
+        <P>Your mind is always buzzing with unexplored ideas and plans.</P>
+        <select name="one" id="select-one">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 2</h3>
+        <P>Generally speaking, you rely more on your experience than your imagination.</P>
+        <select name="two" id="select-two">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 3</h3>
+        <P>You find it easy to stay relaxed and focused even when there is some pressure.</P>
+        <select name="three" id="select-three">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 4</h3>
+        <P>You rarely do something just out of sheer curiosity.</P>
+        <select name="four" id="select-four">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 5</h3>
+        <P>People can rarely upset you.</P>
+        <select name="five" id="select-five">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 6</h3>
+        <P>It is often difficult for you to relate to other people’s feelings.</P>
+        <select name="six" id="select-six">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 7</h3>
+        <P>In a discussion, truth should be more important than people’s sensitivities.</P>
+        <select name="seven" id="select-seven">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 8</h3>
+        <P>You rarely get carried away by fantasies and ideas.</P>
+        <select name="eight" id="select-eight">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 9</h3>
+        <P>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</P>
+        <select name="nine" id="select-nine">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <h3>Question 10</h3>
+        <P>You feel more energetic after spending time with a group of people.</P>
+        <select name="nine" id="select-nine">
+            <option value="">--Please choose an option--</option>
+            <option value="1">1-Strongly Disagree</option>
+            <option value="2">2-Disagree</option>
+            <option value="3">3-Neutral</option>
+            <option value="4">4-Agree</option>
+            <option value="5">5-Strongly Agree</option>
+        </select>
+        <p><button id='sendSurvey'>SUBMIT</button></p>
+        <script>
+            console.log('start');
+            $(function(){
+                $('#sendSurvey').on('click', function(e){
+                    e.preventDefault();
+                    console.log($('select').map(() => $(this).val() + 'AHA'));
+                });
+            });
+        </script>
+    </body>
+</html>
