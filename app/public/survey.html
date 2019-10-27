@@ -120,7 +120,7 @@
                         data: {
                             name: $('#friend-name').val(),
                             photo: $('#friend-photo').val(),
-                            answers: $.makeArray($('select').map((i, element) => $(element).val()))
+                            scores: $.makeArray($('select').map((i, element) => $(element).val()))
                         },
                         success: (data) => console.log('Client success!', data)
                     });
