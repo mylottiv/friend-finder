@@ -1,10 +1,12 @@
 // Init node modules
 const express = require('express');
 const fs = require('fs');
-const friends = JSON.parse(fs.readFileSync('./app/data/friends.json', 'utf8', (err, data) => {
+// JSON file is imported wrapped in brackets to cast as array
+const friends = JSON.parse('[' + fs.readFileSync('./app/data/friends.json', 'utf8', (err, data) => {
     if (err) throw err;
-    return data;
-}));
+    return (data);
+}) + ']');
+console.log(friends);
 const app = module.exports = express();
 
 // Set api controller for get requests
@@ -27,8 +29,11 @@ app.post('/api/friends', function(req, res){
 
     // Adds new friend to saved array and saves it to file
     friends.push(newFriend);
-    fs.appendFile('./app/data/friends.json', newFriend, console.log('New Friend saved to database!'))
-
+    // JSON file is saved as comma separated list of objects
+    fs.appendFile('./app/data/friends.json', ',' + JSON.stringify(newFriend), (err) => {
+        if (err) throw err; 
+        console.log('New Friend saved to database!');
+    })
     res.json(friends[bestFriend.index]);
 });
 
