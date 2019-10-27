@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = module.exports = express();
 
+// Set HTML Controllers
 app.get('/', function(req, res){
     res.sendFile(path.join(__dirname.replace('routing', 'public'),'home.html'));
 })

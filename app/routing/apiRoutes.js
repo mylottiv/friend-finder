@@ -1,35 +1,52 @@
 // Init node modules
 const express = require('express');
 const fs = require('fs');
-const friends = JSON.parse(fs.readFileSync('./app/data/friends.js', 'utf8', (err, data) => {
+const friends = JSON.parse(fs.readFileSync('./app/data/friends.json', 'utf8', (err, data) => {
     if (err) throw err;
     return data;
 }));
 const app = module.exports = express();
 
-app.get('/api/friends', function(req, res){
-    res.json(friends);
+// Set api controller for get requests
+app.get('/api/friends/:friend?', function(req, res){
+    if (!req.param.friend) {
+        res.json(friends);
+    } else {
+        res.json(friends.find(req.param.friend));
+    }
 });
 
+// Set api controller for new friends post requets
 app.post('/api/friends', function(req, res){
     const newFriend = req.body;
     const newFriendTotal = newFriend.scores.reduce((acum, cur) => acum += parseInt(cur), 0);
-    console.log(friends.reduce(compare(newFriendTotal), {index: -1, bestScore: -1}));
+
+    // Index and bestScore set to -1 as initialization flags
+    const bestFriend = friends.reduce(compare(newFriendTotal), {index: -1, bestScore: -1});
+    console.log(friends[bestFriend.index]);
+
+    // Adds new friend to saved array and saves it to file
     friends.push(newFriend);
-    // res.send(req.body + 'agh');
-    // res.send('Post request to friends');
+    fs.appendFile('./app/data/friends.json', newFriend, console.log('New Friend saved to database!'))
+
+    res.json(friends[bestFriend.index]);
 });
 
+// Reducer that compares score differences between the new friend and saved friends
 function compare(newFriendTotal){
     return function(acum, cur, i) {
-    //     console.log('friend', newFriendTotal);
-    //     console.log('reduce', acum, cur, i)
+
+        // Compares the difference between the scpre sums of the new friend and a saved friend
         let curTotal = cur.scores.reduce((acum, cur) => acum += parseInt(cur), 0);
         let difference = Math.abs(curTotal - newFriendTotal)
-        console.log(difference);
+
+        // The best difference is the one closest to zero, unless the -1 init flags
         if (difference <= acum.bestScore || (acum.bestScore === -1 && acum.index === -1)){
+
+            // Saves the high score for comparison and the index for later reference
             acum.bestScore = difference;
             acum.index = i
+        
         }
         return acum;
     }
