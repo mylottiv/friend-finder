@@ -29,11 +29,15 @@ app.post('/api/friends', function(req, res){
 
     // Adds new friend to saved array and saves it to file
     friends.push(newFriend);
+
+    // Custom JSON parsing
+    newFriendString = ',\n' + JSON.stringify(newFriend).replace(/[\[,\{]/g, '$&\n\t').replace(/[\]]/, '\n\t$&\n').replace(/"([0-9]*)"/g, '$1');
+    
     // JSON file is saved as comma separated list of objects
-    fs.appendFile('./app/data/friends.json', ',' + JSON.stringify(newFriend), (err) => {
+    fs.appendFile('./app/data/friends.json', newFriendString, (err) => {
         if (err) throw err; 
         console.log('New Friend saved to database!');
-    })
+    });
     res.json(friends[bestFriend.index]);
 });
 
