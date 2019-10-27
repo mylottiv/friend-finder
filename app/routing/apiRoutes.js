@@ -36,9 +36,9 @@ app.post('/api/friends', function(req, res){
 function compare(newFriendTotal){
     return function(acum, cur, i) {
 
-        // Compares the difference between the scpre sums of the new friend and a saved friend
+        // Compares the difference between the score sums of the new friend and a saved friend
         let curTotal = cur.scores.reduce((acum, cur) => acum += parseInt(cur), 0);
-        let difference = Math.abs(curTotal - newFriendTotal)
+        let difference = Math.abs(curTotal - newFriendTotal);
 
         // The best difference is the one closest to zero, unless the -1 init flags
         if (difference <= acum.bestScore || (acum.bestScore === -1 && acum.index === -1)){

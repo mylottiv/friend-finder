@@ -21,17 +21,3 @@ app.listen(PORT, function () {
     console.log('Listening on port', PORT);
 })
 
-function compare(newFriendTotal){
-    return function(acum, cur, i) {
-    //     console.log('friend', newFriendTotal);
-    //     console.log('reduce', acum, cur, i)
-        let curTotal = cur.scores.reduce((acum, cur) => acum += parseInt(cur), 0);
-        let difference = Math.abs(curTotal - newFriendTotal)
-        console.log(difference);
-        if (difference <= acum.bestScore || (acum.bestScore === -1 && acum.index === -1)){
-            acum.bestScore = difference;
-            acum.index = i
-        }
-        return acum;
-    }
-}
