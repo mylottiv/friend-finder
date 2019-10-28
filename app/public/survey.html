@@ -1,7 +1,31 @@
 <html>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <head>
+        <!-- Header -->
+        <!-- <div class="jumbotron container-fluid" id = "header-container"> -->
+        <!-- Modal -->
+        <div class="modal fade" id="match-found-modal-center" tabindex="-1" role="dialog" aria-labelledby="match-found-modal-center">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="match-found-modal-title">Match found!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id='match-found-text'>{name_goes_here} is your new best friend!</p>
+                        <img src='' class='img-thumbnail' id='match-image'>
+                        <button type='button' class='btn btn-primary btn-block' data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </head>
     <body>
         <form action='/api/friends' method='POST' id='friend-survey'>
             <p><label for='friend-name'>Enter your name:</label>
@@ -122,10 +146,17 @@
                             photo: $('#friend-photo').val(),
                             scores: $.makeArray($('select').map((i, element) => $(element).val()))
                         },
-                        success: (data) => console.log('Client success!', data)
+                        success: (data) => {
+                            console.log('Client success!', data);
+                            $('#match-found-modal-center').modal();
+                            $('#match-image').attr('src', data.photo);
+                            $('#match-found-text').text((i, str) => str.replace('{name_goes_here}', data.name));
+                            console.log('test', $('#match-found-modal-center'));
+                        }
                     });
                 });
             });
+            
         </script>
     </body>
 </html>
