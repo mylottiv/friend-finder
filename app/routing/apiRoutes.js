@@ -11,10 +11,10 @@ const app = module.exports = express();
 
 // Set api controller for get requests
 app.get('/api/friends/:friend?', function(req, res){
-    if (!req.param.friend) {
+    if (!req.params.friend) {
         res.json(friends);
     } else {
-        res.json(friends.find(req.param.friend));
+        res.json(friends.find(friend => friend.name === req.params.friend));
     }
 });
 
